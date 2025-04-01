@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace HarryUtils {
+namespace HarryUtils.Timer {
     public class Timer {
         // ==================== VARIABLES ===================
         #region Public Variables

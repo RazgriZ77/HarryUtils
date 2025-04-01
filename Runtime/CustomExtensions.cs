@@ -145,7 +145,7 @@ namespace HarryUtils {
         #region Enums
         /// <summary> Devuelve 'true' si el enum contiene más de un valor </summary>
         public static bool MoreThanOneFlag<T>(this T _value) where T : Enum {
-            return Utils.CountBits(Convert.ToInt32(_value)) > 1;
+            return CustomUtils.CountBits(Convert.ToInt32(_value)) > 1;
         }
 
         public static T[] GetActiveFlags<T>(this T _value) where T : Enum {
@@ -202,7 +202,7 @@ namespace HarryUtils {
             if (_transform.childCount == 0) return;
             
             foreach (Transform _child in _transform) {
-                GameObject.Destroy(_child.gameObject);
+                UnityEngine.Object.Destroy(_child.gameObject);
             }
         }
 

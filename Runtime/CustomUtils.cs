@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace HarryUtils {
-    public static class Utils {
+    public static class CustomUtils {
         public static float Distance(Vector2 _a, Vector2 _b) =>  (_b - _a).sqrMagnitude;
         
         public static void CanvasGroupState(ref CanvasGroup _canvasGroup, bool _state) {
@@ -46,7 +44,7 @@ namespace HarryUtils {
         }
 
         /// <summary> Devuelve el valor que se le pasa como parámetro en positivo o negativo </summary>
-        public static float GetRandomNegative(float _value) => (UnityEngine.Random.Range(0,2) * 2 - 1) * _value;
+        public static float GetRandomNegative(float _value) => (Random.Range(0,2) * 2 - 1) * _value;
 
         public static int CountBits(int _number) {
             int _count = 0;

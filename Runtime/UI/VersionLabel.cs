@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-namespace HarryUtils {
+namespace HarryUtils.UI {
     [RequireComponent(typeof(TextMeshProUGUI))]
     public class VersionLabel : MonoBehaviour {
         // ==================== VARIABLES ===================

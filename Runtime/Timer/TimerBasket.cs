@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HarryUtils {
+namespace HarryUtils.Timer {
     public static class TimerBasketExtensions {
         public static Timer AddToBasket<T>(this Timer _timer, T _key) {
             TimerBasket<T>.Get.AddToList(_key, _timer);

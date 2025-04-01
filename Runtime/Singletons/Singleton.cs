@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace HarryUtils {
+namespace HarryUtils.Singleton {
 	public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour {
 		#region Public Variables
 		public static bool IsAwake => instance != null;
