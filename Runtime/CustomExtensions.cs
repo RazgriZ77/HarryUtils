@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using ZXing.Rendering;
 
 namespace HarryUtils {
     public static class CustomExtensions {
@@ -162,19 +163,34 @@ namespace HarryUtils {
 
         #region Scroll Rect
         /// <summary> Show up a scroll element </summary>
-        public static Vector2 BringChildToView(this ScrollRect _scroll, RectTransform _child) {
+        public static void BringChildToView(this ScrollRect _scroll, RectTransform _child, float _offset = 1f) {
+            /*
             Vector2 _viewportLocalPosition = _scroll.viewport.localPosition;
             Vector2 _childLocalPosition = _child.localPosition;
 
-            return new(
+            _scroll.content.localPosition = new(
                 0 - (_viewportLocalPosition.x + _childLocalPosition.x),
                 0 - (_viewportLocalPosition.y + _childLocalPosition.y)
             );
+            */
+
+            Rect _rect = ((RectTransform)_scroll.transform).rect;
+            float _itemPositionY = _scroll.transform.InverseTransformPoint(_child.position).y;
+            float _halfItemHeight = _child.rect.height / 2f;
+
+            var _lowerBound = _rect.yMax + _offset;
+            var _upperBound = _rect.yMax - _offset;
+
+            var _itemLowerBound = _itemPositionY - _halfItemHeight;
+            var _itemUpperBound = _itemPositionY + _halfItemHeight;
+
+            if (_itemLowerBound < _lowerBound) _scroll.content.anchoredPosition += new Vector2(0, _lowerBound - _itemLowerBound);
+            else if (_itemUpperBound > _upperBound) _scroll.content.anchoredPosition += new Vector2(0, -(_itemUpperBound - _upperBound));
         }
 
         /// <summary> Show up a scroll element </summary>
-        public static Vector2 BringChildToView(this ScrollRect _scroll, int _index) {
-            return _scroll.BringChildToView(_scroll.content.GetChild(_index).transform as RectTransform);
+        public static void BringChildToView(this ScrollRect _scroll, int _index, float _offset = 1) {
+            _scroll.BringChildToView(_scroll.content.GetChild(_index).transform as RectTransform, _offset);
         }
 
         /// <summary> Check if scroll has childs </summary>

@@ -1,8 +1,24 @@
+using System.Collections;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace HarryUtils {
     public static class CustomUtils {
+        #region Tasks
+        public static Task<bool> WaitOneFrameAsync(this MonoBehaviour _monoBehaviour) {
+            var _tcs = new TaskCompletionSource<bool>();
+            _monoBehaviour.StartCoroutine(WaitOneFrame(_tcs));
+            
+            return _tcs.Task;
+        }
+
+        static IEnumerator WaitOneFrame(TaskCompletionSource<bool> _tcs) {
+            yield return new WaitForEndOfFrame();
+            _tcs.TrySetResult(true);
+        }
+        #endregion
+        
         public static float Distance(Vector2 _a, Vector2 _b) =>  (_b - _a).sqrMagnitude;
         
         public static void CanvasGroupState(ref CanvasGroup _canvasGroup, bool _state) {
