@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 namespace HarryUtils {
@@ -18,6 +19,20 @@ namespace HarryUtils {
             _tcs.TrySetResult(true);
         }
         #endregion
+        
+        public static string TrimEmail(string _email) {
+            return Regex.Replace(_email, @"[\.\$#\[\]/]", "_");
+        }
+        
+        public static Color ColorFromHex(string _hex) {
+            if (ColorUtility.TryParseHtmlString(_hex, out Color _color)) return _color;
+            else return Color.white;
+        }
+
+        public static Color ColorFromHex(string _hex, float _alpha) {
+            if (ColorUtility.TryParseHtmlString(_hex, out Color _color)) return new Color(_color.r, _color.g, _color.b, _alpha);
+            else return Color.white;
+        }
         
         public static float Distance(Vector2 _a, Vector2 _b) =>  (_b - _a).sqrMagnitude;
         
