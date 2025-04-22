@@ -20,6 +20,16 @@ namespace HarryUtils {
         }
         #endregion
         
+        #region GPS
+        public static bool CheckGPSAvailability() {
+            if (!Input.location.isEnabledByUser) {
+                return false;
+            }
+
+            return SystemInfo.supportsLocationService;
+        }
+        #endregion
+        
         public static string TrimEmail(string _email) {
             return Regex.Replace(_email, @"[\.\$#\[\]/]", "_");
         }

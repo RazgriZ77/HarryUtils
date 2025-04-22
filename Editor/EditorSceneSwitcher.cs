@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 
-namespace HarryUtils {
+namespace HarryUtils.Editor {
     public static class EditorSceneSwitcher {
         public static bool AutoEnterPlaymode = false;
         public static readonly List<string> ScenePaths = new();

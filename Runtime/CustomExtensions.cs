@@ -339,6 +339,22 @@ namespace HarryUtils {
         }
         #endregion
         
+        #region Particles
+        public static void PlayParticles(this ParticleSystem[] _particles) {
+            for (int i = 0; i < _particles.Length; i++) {
+                if (_particles[i].isPlaying) continue;
+                _particles[i].Play(true);
+            }
+        }
+
+        public static void StopParticles(this ParticleSystem[] _particles, ParticleSystemStopBehavior _stopBehavior = ParticleSystemStopBehavior.StopEmitting) {
+            for (int i = 0; i < _particles.Length; i++) {
+                if (!_particles[i].isPlaying) continue;
+                _particles[i].Stop(true, _stopBehavior);
+            }
+        }
+        #endregion
+        
         #region Others
         /// <summary> Devuelve 'true' en el caso de que el action posea el método que se le comparta como parámetro </summary>
         public static bool IsRegistered(this Action _action, Delegate _handler) {
