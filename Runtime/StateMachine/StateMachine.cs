@@ -49,7 +49,6 @@ namespace HarryUtils.StateMachineTool {
 
         public void ChangeState(TKey _key) {
             if (!states.ContainsKey(_key)) Debug.LogError($"No se puede cambiar al estado '{_key}' porque no existe");
-            else if (currentStateKey.Equals(_key)) return;
             else {
                 currentState?.OnExit();
 
