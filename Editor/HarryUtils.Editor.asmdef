@@ -1,7 +1,9 @@
 {
     "name": "HarryUtils.Editor",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "HarryUtils"
+    ],
     "includePlatforms": [
         "Editor"
     ],
