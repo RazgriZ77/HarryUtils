@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Runtime.CompilerServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.UI;
@@ -56,6 +57,24 @@ namespace HarryUtils {
             for (int i = 0; i < _gameObject.transform.childCount; i++) {
                 _gameObject.transform.GetChild(i).gameObject.SetLayerRecursively(_layer);
             }
+        }
+        #endregion
+
+        #region Strings
+        public static bool Contains(this string _source, string _toCheck, StringComparison _comparison) {
+            if (_toCheck.IsNullOrEmpty()) {
+                throw new ArgumentNullException(nameof(_toCheck));
+            }
+
+            if (_source.Equals(string.Empty)) {
+                return false;
+            }
+
+            if (_toCheck.Equals(string.Empty)) {
+                return true;
+            }
+
+            return _source.IndexOf(_toCheck, _comparison) >= 0;
         }
         #endregion
 
@@ -355,6 +374,13 @@ namespace HarryUtils {
         }
         #endregion
         
+        #region Structs
+        /// <summary> Comprueba si un struct es igual a su valor por defecto (default(T)). </summary>
+        public static bool IsNull<T>(this T structure) where T : struct {
+            return structure.Equals(default(T));
+        }
+        #endregion
+        
         #region Others
         /// <summary> Devuelve 'true' en el caso de que el action posea el método que se le comparta como parámetro </summary>
         public static bool IsRegistered(this Action _action, Delegate _handler) {
@@ -372,6 +398,17 @@ namespace HarryUtils {
             foreach (Transform _child in _transform) {
                 UnityEngine.Object.Destroy(_child.gameObject);
             }
+        }
+
+        public static Transform RecursiveFindChild(this Transform _parent, string _childName) {
+            Transform _result = null;
+
+            foreach (Transform _child in _parent) {
+                _result = _child.name.Contains(_childName) ? _child : RecursiveFindChild(_child, _childName);
+                if (_result) break;
+            }
+
+            return _result;
         }
 
         public static void SetInteractable(this CanvasGroup _canvasGroup, bool _state) {

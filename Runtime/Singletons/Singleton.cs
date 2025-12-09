@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace HarryUtils.Singleton {
@@ -10,6 +11,13 @@ namespace HarryUtils.Singleton {
 					instance = (T)FindFirstObjectByType(typeof(T));
 
 					if (instance == null) {
+						throw new InvalidOperationException(
+							$"[Singleton Critical Error] Se solicitó '{typeof(T)}' pero no existe en la escena. " +
+							"Asegúrate de añadirlo antes de iniciar el juego."
+						);
+
+						/*
+					}
 						string _goName = typeof(T).ToString();
 						GameObject _go = GameObject.Find(_goName);
 						
@@ -18,6 +26,7 @@ namespace HarryUtils.Singleton {
 						};
 						
 						instance = _go.AddComponent<T>();
+						*/
 					}
 				}
 
